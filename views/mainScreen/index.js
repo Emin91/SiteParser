@@ -18,11 +18,9 @@ export const MainScreen = () => {
 	const [webViewLink, setWebViewLink] = useState('');
 	const [isVisible, setIsVisible] = useState(false);
 	const [refreshing, setRefreshing] = useState(false);
-	console.log(`newsData`, newsData)
-	console.log(`webViewLink`, DOMAIN + webViewLink)
 
 	const getNewsFromSite = async () => {
-		const { data } = await Axios.get(DOMAIN);
+		const { data } = await Axios.get('https://www.npmjs.com/package/react-select');
 		const $ = Cheerio.load(data);
 
 		const findView = (index, element) => {
@@ -30,23 +28,11 @@ export const MainScreen = () => {
 		};
 
 		let newArray = [];
-		$('.news-list').map((i, e) => {
-			e.children.map((_index, _elem) => {
-				const postTitles = findView(_elem, '.title');
-				const postImageLink = $('.news-i').eq(_elem).find('.news-i-img').attr('style') || imageLink;
-				const formated = postImageLink.replace('background-image: url(', '').replace(')', '');
-				const postLink = $('.news-i').eq(_elem).find('.news-i-inner').attr('href');
-				const postDay = findView(_elem, '.date-day');
-				const postMonth = findView(_elem, '.date-month');
-				const postYear = findView(_elem, '.date-year');
-				const postTime = findView(_elem, '.when-time');
-				const likes = findView(_elem, '.stats_likes');
-				const dislikes = findView(_elem, '.stats_dislikes');
-				const postViews = findView(_elem, '.stats_views');
-				newArray.push({ postTitles, postImageLink: formated || imageLink, postLink, postDay, postMonth, postYear, postTime, likes, dislikes, postViews });
-			});
-			return newArray;
-		});
+		const catalog = $('.readme').html()
+		// $('#intent > i').each(function(i, element){
+		// 	element.children.find('')
+		// })
+		console.log(`catalog`, catalog)
 		setNewsData(newArray);
 	};
 
@@ -62,7 +48,7 @@ export const MainScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			{ !newsData.length
+			{/* { !newsData.length
 				? <View style={styles.indicator}>
 					<ActivityIndicator size='large' color='white' />
 					<Text style={styles.loadingText}>Xəbərlər yüklənilir...</Text>
@@ -86,7 +72,7 @@ export const MainScreen = () => {
 						</TouchableOpacity>
 					<WebView source={{ uri: DOMAIN + webViewLink }}/>
 					</View>
-                </Modal>
+                </Modal> */}
 		</View>
 	)
 }

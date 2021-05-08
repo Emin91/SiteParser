@@ -1,9 +1,9 @@
 import React from 'react';
-import { MainScreen } from './views/mainScreen';
+import { MoviesScreen } from './views/secondScreen';
 
 export default function App() {
 
 	return (
-		<MainScreen />
+		<MoviesScreen />
 	)
 }
